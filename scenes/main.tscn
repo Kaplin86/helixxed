@@ -4,11 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ciajl7kdmek7t" path="res://icon.svg" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://c3wdnwh38uvur" path="res://assets/sprites/transparent_checkerboard.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://bgjrpoaypyffu" path="res://code/paddle.gd" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://bulumalxe563i" path="res://code/roundedsprite.gd" id="3_tipki"]
 [ext_resource type="Texture2D" uid="uid://d2vrw54acvjak" path="res://assets/sprites/transparent_checkerboard_alt.png" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://bwi1m1w21wm7y" path="res://code/camera.gd" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://csuhnhqxdpyd3" path="res://assets/sprites/ball.png" id="8_85g3d"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(80, 80)
+[sub_resource type="CircleShape2D" id="CircleShape2D_85g3d"]
+radius = 40.0
 
 [sub_resource type="Gradient" id="Gradient_sugp2"]
 offsets = PackedFloat32Array(0, 0.78205127, 1)
@@ -30,6 +32,26 @@ size = Vector2(872, 1264)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
 size = Vector2(768, 704)
 
+[sub_resource type="Shader" id="Shader_choun"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+shader = SubResource("Shader_choun")
+
 [node name="Node2D" type="Node2D" unique_id=1064481213]
 
 [node name="Ball" type="CharacterBody2D" parent="." unique_id=1024275615]
@@ -37,11 +59,19 @@ position = Vector2(384, 552)
 script = ExtResource("1_0wfyh")
 
 [node name="Icon" type="Sprite2D" parent="Ball" unique_id=687207888]
-scale = Vector2(0.6209155, 0.6209155)
-texture = ExtResource("2_sugp2")
+texture_filter = 1
+scale = Vector2(1.4506956, 1.4506956)
+texture = ExtResource("8_85g3d")
+script = ExtResource("3_tipki")
+
+[node name="Icon2" type="Sprite2D" parent="Ball" unique_id=1513666794]
+texture_filter = 1
+position = Vector2(119.99999, 0)
+scale = Vector2(1.4506956, 1.4506956)
+texture = ExtResource("8_85g3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1145480787]
-shape = SubResource("RectangleShape2D_jyhfs")
+shape = SubResource("CircleShape2D_85g3d")
 
 [node name="Line2D" type="Line2D" parent="Ball" unique_id=1172934841]
 show_behind_parent = true
@@ -99,3 +129,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16206557, 0.1620656, 0.16206557, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1240157995]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1135697334]
+material = SubResource("ShaderMaterial_ya4ey")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
