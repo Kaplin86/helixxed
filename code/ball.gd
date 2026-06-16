@@ -1,0 +1,40 @@
+extends CharacterBody2D
+
+@export var speed : float = 500.0
+@export var mounted = true
+
+signal bounce
+
+func _ready():
+	velocity = Vector2.RIGHT.rotated(deg_to_rad(70)) * speed
+
+func _process(delta):
+	if mounted:
+		$Line2D.visible = true
+		var pos = to_local(get_global_mouse_position())
+		pos = pos.normalized()
+		$Line2D.set_point_position(1,pos * speed * 0.5)
+		
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			unmount()
+		
+	else:
+		$Line2D.visible = false
+
+func unmount():
+	var pos = to_local(get_global_mouse_position())
+	var angle = pos.normalized()
+	velocity = angle * speed
+	mounted = false
+
+func _physics_process(delta):
+	if mounted:
+		return
+	
+	var col = move_and_collide(velocity * delta)
+	
+	if col:
+		velocity = velocity.bounce(col.get_normal())
+		velocity = velocity.normalized() * speed
+		speed *= 1.05
+		bounce.emit()
