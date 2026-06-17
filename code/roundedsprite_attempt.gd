@@ -1,61 +1,83 @@
 extends Sprite2D
 
+enum triangles {DOWN_UP,UP_DOWN}
+
 func _ready():
 	var sprite : Texture2D = texture
-	var results = upscale(sprite.get_image(),5,5)
-	texture = results[0]
-	scale = results[1]
+	var results = upscale(sprite.get_image(),9,9)
+	var results2 = [texture,scale]
+	
+	while true:
+		texture = results[0]
+		scale = results[1]
+		await get_tree().create_timer(0.5).timeout
+		texture = results2[0]
+		scale = results2[1]
+		
+		await get_tree().create_timer(0.5).timeout
 
 
-var previousTriangles = []
 func upscale(sprite : Image, amountX : int, amountY : int):
-	previousTriangles = []
+	var previousTriangles = {}
 	var newImgSize = Vector2(sprite.get_size().x * amountX,sprite.get_size().y * amountY)
 	var newImage = Image.create(newImgSize.x,newImgSize.y,false, Image.FORMAT_RGBA8)
 	
+	var size = sprite.get_size()
 	# FIRST PASS -------------------------------------------
-	for X in range(1,sprite.get_size().x - 1):
-		for Y in range(1,sprite.get_size().y - 1):
-			var upperColor = sprite.get_pixel(X,Y -1)
+	for X in range(size.x - 1):
+		for Y in range(size.y - 1):
+			var color = sprite.get_pixel(X,Y)
 			var lowerColor = sprite.get_pixel(X,Y + 1)
-			var leftColor = sprite.get_pixel(X - 1 ,Y)
+			var lowerRightColor = sprite.get_pixel(X + 1 ,Y+ 1)
 			var rightColor = sprite.get_pixel(X + 1,Y )
-			var add = true
-			for I in [Vector2i(X + 1,Y),Vector2i(X,Y -1),Vector2i(X,Y + 1),Vector2i(X - 1 ,Y)]:
-				if previousTriangles.has(I):
-					add = false
+			if color != rightColor and rightColor == lowerColor and lowerColor == lowerRightColor:
+				# 01
+				# 11
+				if previousTriangles.has(Vector2i(X,Y)):
+					previousTriangles[Vector2i(X,Y)] = -1
+				else:
+					previousTriangles[Vector2i(X,Y)] = triangles.DOWN_UP
 			
-			if upperColor == leftColor and rightColor == lowerColor:
-				if add: previousTriangles.append(Vector2i(X,Y))
-				
-			elif upperColor == rightColor and lowerColor == leftColor:
-				if add: previousTriangles.append(Vector2i(X,Y))
+			elif  color != rightColor and color == lowerColor and color == lowerRightColor:
+				# 10
+				# 11
+				if previousTriangles.has(Vector2i(X + 1,Y)):
+					previousTriangles[Vector2i(X + 1,Y)] = -1
+				else:
+					previousTriangles[Vector2i(X + 1,Y)] = triangles.UP_DOWN
+			
+			elif  color == rightColor and color == lowerColor and color != lowerRightColor:
+				# 11
+				# 10
+				if previousTriangles.has(Vector2i(X + 1,Y + 1)):
+					previousTriangles[Vector2i(X + 1,Y + 1)] = -1
+				else:
+					previousTriangles[Vector2i(X + 1,Y + 1)] = triangles.DOWN_UP
+			
+			elif  color == rightColor and color != lowerColor and color == lowerRightColor:
+				# 11
+				# 01
+				if previousTriangles.has(Vector2i(X,Y + 1)):
+					previousTriangles[Vector2i(X,Y + 1)] = -1
+				else:
+					previousTriangles[Vector2i(X,Y + 1)] = triangles.UP_DOWN
+
 			
 	
 	# SECOND PASS -------------------------------------------
-	for X in range(1,sprite.get_size().x - 1):
-		for Y in range(1,sprite.get_size().y - 1):
-			
-			
-			
+	for X in sprite.get_size().x:
+		for Y in sprite.get_size().y:
 			var triangleStyle = 0
 			var pixelColor = sprite.get_pixel(X,Y)
 			var upperColor = sprite.get_pixel(X,Y -1)
 			var lowerColor = sprite.get_pixel(X,Y + 1)
-			var leftColor = sprite.get_pixel(X - 1 ,Y)
-			var rightColor = sprite.get_pixel(X + 1,Y )
 			
-			if null in [pixelColor,upperColor,lowerColor,leftColor,rightColor]:
+			if Vector2i(X,Y) in previousTriangles:
+				for xOffset in amountX:
+					for yOffset in amountY:
+						var finalPos = Vector2i((X * amountX) + xOffset, (Y * amountY) + yOffset)
+						newImage.set_pixelv(finalPos,Color.RED)
 				continue
-			
-			if upperColor == leftColor and rightColor == lowerColor:
-				triangleStyle = 1
-			elif upperColor == rightColor and lowerColor == leftColor:
-				triangleStyle = 2
-			
-			for I in [Vector2i(X + 1,Y),Vector2i(X,Y -1),Vector2i(X,Y + 1),Vector2i(X - 1 ,Y)]:
-				if previousTriangles.has(I):
-					triangleStyle = 0
 			
 			#triangle style is just for the shape of the triangles (aka if it cuts one way vs the other)
 			
@@ -90,7 +112,6 @@ func upscale(sprite : Image, amountX : int, amountY : int):
 					for yOffset in amountY:
 						var finalPos = Vector2i((X * amountX) + xOffset, (Y * amountY) + yOffset)
 						newImage.set_pixelv(finalPos,pixelColor)
-	
 	
 
 	return [ImageTexture.create_from_image(newImage), scale * (Vector2.ONE/Vector2(amountX,amountY))]
