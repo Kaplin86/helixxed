@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b6bj0jfohqwy4"]
+
+[ext_resource type="Script" uid="uid://bnwvxf3c3w5b3" path="res://code/brick.gd" id="1_0w5h4"]
+[ext_resource type="Texture2D" uid="uid://ciajl7kdmek7t" path="res://icon.svg" id="1_5l4w1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0w5h4"]
+size = Vector2(46, 16)
+
+[node name="StaticBody2D2" type="StaticBody2D" unique_id=559783319]
+script = ExtResource("1_0w5h4")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1133845109]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+scale = Vector2(0.3609461, 0.119419225)
+texture = ExtResource("1_5l4w1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=430487247]
+shape = SubResource("RectangleShape2D_0w5h4")
+
+[node name="hp" type="Label" parent="." unique_id=164199918]
+offset_left = -23.0
+offset_top = -12.0
+offset_right = 23.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1"
+horizontal_alignment = 1

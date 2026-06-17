@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed : float = 500.0
 @export var mounted = true
+@export var damage = 1
 
 signal bounce
 
@@ -38,3 +39,9 @@ func _physics_process(delta):
 		velocity = velocity.normalized() * speed
 		speed *= 1.05
 		bounce.emit()
+		
+		if col.get_collider() is Brick:
+			onBrickImpact(col.get_collider())
+
+func onBrickImpact(brick : Brick):
+	brick.hp -= damage
