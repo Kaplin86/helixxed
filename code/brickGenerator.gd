@@ -25,6 +25,6 @@ func _generate(difficulty = 1) -> Array[Brick]:
 			var newBrick = brickScene.instantiate()
 			get_parent().add_child(newBrick)
 			newBrick.global_position = Vector2(xPos,yLevel)
-			newBrick.hp = difficulty + randi_range(0,difficulty)
+			newBrick.hp = round(difficulty + randi_range(0,difficulty))
 			bricks.append(newBrick)
 	return bricks

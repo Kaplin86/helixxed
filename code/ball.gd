@@ -1,10 +1,12 @@
 extends CharacterBody2D
+class_name Ball
 
 @export var speed : float = 500.0
 @export var mounted = true
 @export var damage = 1
 
 signal bounce
+signal ballDead
 
 func _ready():
 	velocity = Vector2.RIGHT.rotated(deg_to_rad(70)) * speed
@@ -21,6 +23,10 @@ func _process(delta):
 		
 	else:
 		$Line2D.visible = false
+	
+	if global_position.y > 679:
+		queue_free()
+		ballDead.emit()
 
 func unmount():
 	var pos = to_local(get_global_mouse_position())

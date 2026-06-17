@@ -3,7 +3,7 @@ class_name Brick
 
 signal die
 
-@export var hp = 3:
+@export var hp :int = 3:
 	set(value):
 		hp = value
 		updateHpDisplay()
