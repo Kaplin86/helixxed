@@ -8,6 +8,10 @@ class_name Ball
 signal bounce
 signal ballDead
 
+@export var genes : Array[BaseGene]
+
+var calculatingVelocity
+
 func _ready():
 	velocity = Vector2.RIGHT.rotated(deg_to_rad(70)) * speed
 
@@ -38,16 +42,33 @@ func _physics_process(delta):
 	if mounted:
 		return
 	
-	var col = move_and_collide(velocity * delta)
+	calculatingVelocity = velocity
+	
+	# genes part 1
+	for I in genes:
+		I.preCalc(self)
+	
+	var col = move_and_collide(calculatingVelocity * delta)
 	
 	if col:
 		velocity = velocity.bounce(col.get_normal())
 		velocity = velocity.normalized() * speed
-		speed *= 1.05
 		bounce.emit()
 		
+		# genes part 2
+		for I in genes:
+			I.onGeneralBounce(self)
+		
 		if col.get_collider() is Brick:
+			# genes part 2
+			for I in genes:
+				I.onBrickHit(self,col.get_collider())
+			
 			onBrickImpact(col.get_collider())
+		elif col.get_collider() is Paddle:
+			# genes part 3
+			for I in genes:
+				I.onPaddleHit(self)
 
 func onBrickImpact(brick : Brick):
 	brick.hp -= damage

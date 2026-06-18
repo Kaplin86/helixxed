@@ -1,10 +1,33 @@
 [gd_scene format=3 uid="uid://csffxwfdmak2k"]
 
 [ext_resource type="Script" uid="uid://ctixcncbwkw7i" path="res://code/ball.gd" id="1_eew57"]
+[ext_resource type="Script" uid="uid://dslre3i7haxjl" path="res://code/genes/baseGene.gd" id="2_fwo8l"]
 [ext_resource type="Texture2D" uid="uid://depg5tyw37wvi" path="res://assets/sprites/tinyBall.png" id="2_jj7gd"]
 [ext_resource type="Script" uid="uid://d3a3vvb6nr56e" path="res://code/roundedsprite.gd" id="3_fwo8l"]
+[ext_resource type="Script" uid="uid://cf80mxbx0u1u1" path="res://code/genes/normal/floaty.gd" id="3_v8l5b"]
+[ext_resource type="Script" uid="uid://cooisdbui2jlm" path="res://code/genes/normal/bouncy.gd" id="4_iijjg"]
 [ext_resource type="Texture2D" uid="uid://c3wdnwh38uvur" path="res://assets/sprites/transparent_checkerboard.png" id="4_v8l5b"]
 [ext_resource type="Texture2D" uid="uid://d2vrw54acvjak" path="res://assets/sprites/transparent_checkerboard_alt.png" id="5_iijjg"]
+
+[sub_resource type="Resource" id="Resource_iijjg"]
+script = ExtResource("3_v8l5b")
+metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+
+[sub_resource type="Resource" id="Resource_f7kxq"]
+script = ExtResource("4_iijjg")
+metadata/_custom_type_script = "uid://cooisdbui2jlm"
+
+[sub_resource type="Resource" id="Resource_e8gir"]
+script = ExtResource("3_v8l5b")
+metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+
+[sub_resource type="Resource" id="Resource_4m2kh"]
+script = ExtResource("3_v8l5b")
+metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+
+[sub_resource type="Resource" id="Resource_v8l5b"]
+script = ExtResource("3_v8l5b")
+metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85g3d"]
 radius = 29.068884
@@ -22,7 +45,7 @@ frame_1/duration = 1.0
 
 [node name="Ball" type="CharacterBody2D" unique_id=1309816029]
 script = ExtResource("1_eew57")
-damage = 5
+genes = Array[ExtResource("2_fwo8l")]([SubResource("Resource_iijjg"), SubResource("Resource_f7kxq"), SubResource("Resource_e8gir"), SubResource("Resource_4m2kh"), SubResource("Resource_v8l5b")])
 
 [node name="Icon3" type="Sprite2D" parent="." unique_id=1891162449]
 texture_filter = 1

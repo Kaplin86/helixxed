@@ -44,7 +44,7 @@ func _doRound():
 		newBall.global_position = paddle.global_position - Vector2(0,50)
 		newBall.ballDead.connect(func(): 
 				newBallRequest.emit())
-			
+		$Camera2D.ball = newBall
 		dispManager.showShots(shotsRemaining)
 		balls.append(newBall)
 		await newBallRequest

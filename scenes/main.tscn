@@ -57,11 +57,10 @@ position = Vector2(26, 13)
 [node name="Marker2D2" type="Marker2D" parent="Node" unique_id=828133528]
 position = Vector2(737, 211)
 
-[node name="Paddle" type="CharacterBody2D" parent="." unique_id=1275770164 node_paths=PackedStringArray("ball")]
+[node name="Paddle" type="CharacterBody2D" parent="." unique_id=1275770164]
 position = Vector2(384, 608)
 script = ExtResource("3_sugp2")
 speed = 400
-ball = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle" unique_id=659683230]
 shape = SubResource("RectangleShape2D_tbgi4")
