@@ -46,7 +46,7 @@ func _physics_process(delta):
 	
 	# genes part 1
 	for I in genes:
-		I.preCalc(self)
+		I.preCalc(self,delta)
 	
 	var col = move_and_collide(calculatingVelocity * delta)
 	

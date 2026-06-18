@@ -10,5 +10,5 @@ func onBrickHit(_ball : Ball,_brick : Brick):
 func onPaddleHit(_ball : Ball):
 	pass
 
-func preCalc(_ball : Ball):
+func preCalc(_ball : Ball, delta : float):
 	pass

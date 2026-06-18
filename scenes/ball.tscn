@@ -4,30 +4,24 @@
 [ext_resource type="Script" uid="uid://dslre3i7haxjl" path="res://code/genes/baseGene.gd" id="2_fwo8l"]
 [ext_resource type="Texture2D" uid="uid://depg5tyw37wvi" path="res://assets/sprites/tinyBall.png" id="2_jj7gd"]
 [ext_resource type="Script" uid="uid://d3a3vvb6nr56e" path="res://code/roundedsprite.gd" id="3_fwo8l"]
-[ext_resource type="Script" uid="uid://cf80mxbx0u1u1" path="res://code/genes/normal/floaty.gd" id="3_v8l5b"]
-[ext_resource type="Script" uid="uid://cooisdbui2jlm" path="res://code/genes/normal/bouncy.gd" id="4_iijjg"]
+[ext_resource type="Script" uid="uid://s7ty60ufy1jb" path="res://code/genes/normal/homing.gd" id="3_v8l5b"]
+[ext_resource type="Script" uid="uid://cf80mxbx0u1u1" path="res://code/genes/normal/floaty.gd" id="4_iijjg"]
 [ext_resource type="Texture2D" uid="uid://c3wdnwh38uvur" path="res://assets/sprites/transparent_checkerboard.png" id="4_v8l5b"]
+[ext_resource type="Script" uid="uid://ciw0veqdetgss" path="res://code/genes/normal/boost.gd" id="5_f7kxq"]
 [ext_resource type="Texture2D" uid="uid://d2vrw54acvjak" path="res://assets/sprites/transparent_checkerboard_alt.png" id="5_iijjg"]
 
 [sub_resource type="Resource" id="Resource_iijjg"]
 script = ExtResource("3_v8l5b")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+metadata/_custom_type_script = "uid://s7ty60ufy1jb"
 
 [sub_resource type="Resource" id="Resource_f7kxq"]
 script = ExtResource("4_iijjg")
-metadata/_custom_type_script = "uid://cooisdbui2jlm"
+metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
 
 [sub_resource type="Resource" id="Resource_e8gir"]
-script = ExtResource("3_v8l5b")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
-
-[sub_resource type="Resource" id="Resource_4m2kh"]
-script = ExtResource("3_v8l5b")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
-
-[sub_resource type="Resource" id="Resource_v8l5b"]
-script = ExtResource("3_v8l5b")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+resource_local_to_scene = true
+script = ExtResource("5_f7kxq")
+metadata/_custom_type_script = "uid://ciw0veqdetgss"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85g3d"]
 radius = 29.068884
@@ -43,9 +37,13 @@ frame_0/texture = ExtResource("4_v8l5b")
 frame_1/texture = ExtResource("5_iijjg")
 frame_1/duration = 1.0
 
+[sub_resource type="Gradient" id="Gradient_v8l5b"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="Ball" type="CharacterBody2D" unique_id=1309816029]
 script = ExtResource("1_eew57")
-genes = Array[ExtResource("2_fwo8l")]([SubResource("Resource_iijjg"), SubResource("Resource_f7kxq"), SubResource("Resource_e8gir"), SubResource("Resource_4m2kh"), SubResource("Resource_v8l5b")])
+speed = 800.0
+genes = Array[ExtResource("2_fwo8l")]([SubResource("Resource_iijjg"), SubResource("Resource_f7kxq"), SubResource("Resource_e8gir")])
 
 [node name="Icon3" type="Sprite2D" parent="." unique_id=1891162449]
 texture_filter = 1
@@ -65,3 +63,15 @@ points = PackedVector2Array(0, 0, 112, -128)
 gradient = SubResource("Gradient_sugp2")
 texture = SubResource("AnimatedTexture_jyhfs")
 texture_mode = 1
+
+[node name="Afterimage" type="CPUParticles2D" parent="." unique_id=2118384089]
+show_behind_parent = true
+texture_filter = 1
+emitting = false
+amount = 20
+texture = ExtResource("2_jj7gd")
+lifetime = 0.2
+gravity = Vector2(0, 0)
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_v8l5b")
