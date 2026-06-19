@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c0sjapu47mq6b" path="res://code/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Shader" uid="uid://bkecm8lrxgbcp" path="res://assets/shaders/overlaptextures.gdshader" id="2_bqqt6"]
-[ext_resource type="Texture2D" uid="uid://d1a5fdk2wdctr" path="res://assets/sprites/Helixxed (1).svg" id="3_wu84c"]
+[ext_resource type="Shader" uid="uid://bbxvodj1i2dvr" path="res://assets/shaders/squiggle.gdshader" id="3_oa1go"]
+[ext_resource type="Texture2D" uid="uid://cw8nqb0hud7j7" path="res://assets/sprites/helix_guy.png" id="4_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://dhq0hiu02vaco" path="res://assets/sprites/Helixxed (2).svg" id="5_8ln24"]
+[ext_resource type="Script" uid="uid://bdwba5nybcytc" path="res://code/helixGuy.gd" id="6_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://capb64dn6mam8" path="res://assets/sprites/teal_helix_guy.png" id="6_tbmy8"]
 
 [sub_resource type="Gradient" id="Gradient_dp3eg"]
 offsets = PackedFloat32Array(0, 0.44117647, 1)
@@ -37,6 +41,77 @@ shader_parameter/directions = PackedVector2Array(0, 0, 1, 1, -1, -1, 4, 4, 2, 2)
 shader_parameter/velocities = PackedFloat32Array(0, 2, 3, 2, 2)
 shader_parameter/visible_duration = 15.0
 shader_parameter/transition_duration = 2.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ya4ey"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dd4i"]
+shader = ExtResource("3_oa1go")
+shader_parameter/scale = Vector2(6.42, 6.42)
+shader_parameter/strength = 0.235
+shader_parameter/fps = 9.0
+shader_parameter/noise = SubResource("NoiseTexture2D_ya4ey")
+
+[sub_resource type="Animation" id="Animation_oa1go"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.26774836, 0.26774836)]
+}
+
+[sub_resource type="Animation" id="Animation_tbmy8"]
+resource_name = "main"
+length = 0.635
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.2766667, 0.41000003, 0.56666666),
+"transitions": PackedFloat32Array(1, 1, 2, 0.5547847, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 340), Vector2(0, -340), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.2766667, 0.41000003, 0.56666666),
+"transitions": PackedFloat32Array(1, 1, 2, 1, 1),
+"update": 0,
+"values": [Vector2(0.26774836, 0.26774836), Vector2(0.26774836, 0.26774836), Vector2(0.443, 0.093), Vector2(0.093, 0.443), Vector2(0.26774836, 0.26774836)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk1qb"]
+_data = {
+&"RESET": SubResource("Animation_oa1go"),
+&"main": SubResource("Animation_tbmy8")
+}
 
 [node name="Main Menu" type="Control" unique_id=1434203507]
 layout_mode = 3
@@ -92,9 +167,29 @@ text = "Guide for new scientists:
 
 5. If your prototype fails even ONE test, it will be [b] discarded [/b]"
 
-[node name="Helixxed(1)" type="Sprite2D" parent="." unique_id=1786749442]
-position = Vector2(243.87561, 117.46066)
-scale = Vector2(0.43413407, 0.43413407)
-texture = ExtResource("3_wu84c")
+[node name="TealHelixGuy" type="Sprite2D" parent="." unique_id=163206472]
+material = SubResource("ShaderMaterial_5dd4i")
+position = Vector2(783.105, 309)
+scale = Vector2(0.26774836, 0.26774836)
+texture = ExtResource("6_tbmy8")
+script = ExtResource("6_jk1qb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TealHelixGuy" unique_id=1872801399]
+libraries/ = SubResource("AnimationLibrary_jk1qb")
+
+[node name="TealHelixGuy2" type="Sprite2D" parent="." unique_id=1105527809]
+material = SubResource("ShaderMaterial_5dd4i")
+position = Vector2(931, 299)
+scale = Vector2(0.26774836, 0.26774836)
+texture = ExtResource("4_rtw2f")
+script = ExtResource("6_jk1qb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TealHelixGuy2" unique_id=1003876300]
+libraries/ = SubResource("AnimationLibrary_jk1qb")
+
+[node name="Helixxed(2)" type="Sprite2D" parent="." unique_id=11096538]
+position = Vector2(255, 115)
+scale = Vector2(0.44318223, 0.44318223)
+texture = ExtResource("5_8ln24")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
