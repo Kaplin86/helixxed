@@ -3,11 +3,8 @@
 [ext_resource type="Script" uid="uid://vsu2cs8v2qd" path="res://code/brickGenerator.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://cnrnpcvnl6ivu" path="res://code/roundManager.gd" id="1_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://ciajl7kdmek7t" path="res://icon.svg" id="2_sugp2"]
-[ext_resource type="Script" uid="uid://dslre3i7haxjl" path="res://code/genes/baseGene.gd" id="3_muem4"]
 [ext_resource type="Script" uid="uid://bgjrpoaypyffu" path="res://code/paddle.gd" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://cooisdbui2jlm" path="res://code/genes/normal/bouncy.gd" id="4_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://csffxwfdmak2k" path="res://scenes/ball.tscn" id="4_tipki"]
-[ext_resource type="Script" uid="uid://cf80mxbx0u1u1" path="res://code/genes/normal/floaty.gd" id="5_0ld40"]
 [ext_resource type="Script" uid="uid://bwi1m1w21wm7y" path="res://code/camera.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b6bj0jfohqwy4" path="res://scenes/brick.tscn" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://tc02t48nud0b" path="res://assets/sprites/helix.png" id="9_choun"]
@@ -17,14 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://mq3ug1ca0gau" path="res://assets/sprites/genes/BouncyGene.png" id="12_trceg"]
 [ext_resource type="Script" uid="uid://do2nphbc1yqp3" path="res://code/roundedspriteTextureRect.gd" id="13_trceg"]
 [ext_resource type="Texture2D" uid="uid://1xu3rh6dyn22" path="res://assets/sprites/genes/FloatyGene.png" id="14_a8y0u"]
-
-[sub_resource type="Resource" id="Resource_gqmmt"]
-script = ExtResource("4_dp3eg")
-metadata/_custom_type_script = "uid://cooisdbui2jlm"
-
-[sub_resource type="Resource" id="Resource_yc10j"]
-script = ExtResource("5_0ld40")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+[ext_resource type="Script" uid="uid://dtffvnth0qvhc" path="res://code/gene_shop.gd" id="18_dp3eg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
 size = Vector2(256, 20)
@@ -64,13 +54,13 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
 shader = SubResource("Shader_choun")
 
-[node name="Node2D" type="Node2D" unique_id=1064481213 node_paths=PackedStringArray("brickGenerator", "paddle", "dispManager")]
+[node name="Node2D" type="Node2D" unique_id=1064481213 node_paths=PackedStringArray("brickGenerator", "paddle", "dispManager", "geneShop")]
 script = ExtResource("1_ya4ey")
 brickGenerator = NodePath("Node")
 ballScene = ExtResource("4_tipki")
 paddle = NodePath("Paddle")
 dispManager = NodePath("ColorRect")
-equipedGenes = Array[ExtResource("3_muem4")]([SubResource("Resource_gqmmt"), SubResource("Resource_yc10j")])
+geneShop = NodePath("Gene Shop")
 
 [node name="Node" type="Node" parent="." unique_id=966838760 node_paths=PackedStringArray("brickStart", "brickEnd")]
 script = ExtResource("1_choun")
@@ -115,7 +105,7 @@ shape = SubResource("RectangleShape2D_sugp2")
 position = Vector2(576, 324)
 script = ExtResource("6_tefeu")
 
-[node name="ColorRect" type="Control" parent="." unique_id=460099268 node_paths=PackedStringArray("roundCount", "shotsRemaining", "geneSlots", "geneSegment")]
+[node name="ColorRect" type="Control" parent="." unique_id=460099268 node_paths=PackedStringArray("roundCount", "shotsRemaining", "geneSlots", "geneSegment", "moneyLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 768.0
@@ -126,6 +116,7 @@ roundCount = NodePath("ColorRect/VBoxContainer/Label")
 shotsRemaining = NodePath("ColorRect/VBoxContainer/Label2")
 geneSlots = [NodePath("ColorRect/VBoxContainer/Control/TextureRect"), NodePath("ColorRect/VBoxContainer/Control/TextureRect2"), NodePath("ColorRect/VBoxContainer/Control/TextureRect3"), NodePath("ColorRect/VBoxContainer/Control/TextureRect4"), NodePath("ColorRect/VBoxContainer/Control/TextureRect5"), NodePath("ColorRect/VBoxContainer/Control/TextureRect6"), NodePath("ColorRect/VBoxContainer/Control/TextureRect7"), NodePath("ColorRect/VBoxContainer/Control/TextureRect8")]
 geneSegment = NodePath("ColorRect/VBoxContainer/Control")
+moneyLabel = NodePath("ColorRect/VBoxContainer/CenterContainer/Panel/MarginContainer/Label")
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=854310778]
 layout_mode = 1
@@ -281,6 +272,7 @@ theme_override_constants/margin_right = 82
 custom_minimum_size = Vector2(184, 0)
 layout_mode = 2
 text = "3000000000000000000$"
+horizontal_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1240157995]
 visible = false
@@ -294,9 +286,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Gene Shop" type="Panel" parent="." unique_id=750539427]
+[node name="Gene Shop" type="Panel" parent="." unique_id=750539427 node_paths=PackedStringArray("shopArea")]
 offset_right = 763.0
 offset_bottom = 648.0
+script = ExtResource("18_dp3eg")
+shopArea = NodePath("HBoxContainer/VBoxContainer/Panel/VBoxContainer")
 
 [node name="Label" type="RichTextLabel" parent="Gene Shop" unique_id=1691745808]
 layout_mode = 0
@@ -337,6 +331,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Button" type="Button" parent="Gene Shop/HBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=1709459418]
+layout_mode = 2
+size_flags_vertical = 3
+text = "PaddleFreezeGene"
+icon = ExtResource("12_trceg")
+expand_icon = true
+
+[node name="Button2" type="Button" parent="Gene Shop/HBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=1549607304]
+layout_mode = 2
+size_flags_vertical = 3
+text = "PaddleFreezeGene"
+icon = ExtResource("14_a8y0u")
+expand_icon = true
+
+[node name="Button3" type="Button" parent="Gene Shop/HBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=963265748]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+text = "FloatyGene"
+icon = ExtResource("14_a8y0u")
+autowrap_mode = 1
+expand_icon = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Gene Shop/HBoxContainer" unique_id=708835161]
 layout_mode = 2
@@ -384,3 +401,6 @@ offset_top = 600.0
 offset_right = 520.0
 offset_bottom = 631.0
 text = "Continue"
+
+[connection signal="pressed" from="Gene Shop/HBoxContainer/VBoxContainer3/Panel2/Button2" to="Gene Shop" method="CharityPressed"]
+[connection signal="pressed" from="Gene Shop/Continue" to="Gene Shop" method="_on_continue_pressed"]

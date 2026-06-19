@@ -2,9 +2,10 @@ extends TextureRect
 
 func _ready():
 	var sprite : Texture2D = texture
-	var results = upscale(sprite.get_image(),5,5)
-	texture = results[0]
-	#scale = results[1]
+	if sprite != null:
+		var results = upscale(sprite.get_image(),5,5)
+		texture = results[0]
+		#scale = results[1]
 
 
 var previousTriangles = []

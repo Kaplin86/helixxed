@@ -1,6 +1,8 @@
 extends Resource
 class_name BaseGene
 
+
+
 func onGeneralBounce(_ball : Ball):
 	pass
 
@@ -15,3 +17,6 @@ func preCalc(_ball : Ball, delta : float):
 
 func calculateDamage(_ball : Ball):
 	return
+
+func _to_string():
+	return str(get_script().get_global_name())

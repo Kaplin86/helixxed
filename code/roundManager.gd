@@ -17,6 +17,13 @@ var win = false
 
 @export var equipedGenes : Array[BaseGene]
 
+@export var geneShop : GeneShop
+
+var money = 999:
+	set(new_value):
+		money = new_value
+		dispManager.showMoney(money)
+
 func _doRound():
 	win = false
 	difficulty += 0.5
@@ -54,7 +61,6 @@ func _doRound():
 		newBall.genes = equipedGenes
 		await newBallRequest
 	
-	print("hoho")
 	process_mode = Node.PROCESS_MODE_DISABLED
 	
 	await get_tree().create_timer(1).timeout
@@ -66,6 +72,9 @@ func _doRound():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 
+func _doShop():
+	await geneShop.doShop()
+
 func onBrickDie():
 	await get_tree().process_frame
 	bricks = bricks.filter(func(obj): return is_instance_valid(obj))
@@ -75,4 +84,5 @@ func onBrickDie():
 func _ready():
 	dispManager.showGenes(equipedGenes)
 	while true:
+		await _doShop()
 		await _doRound()

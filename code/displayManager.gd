@@ -5,6 +5,7 @@ class_name DisplayManager
 @export var shotsRemaining : Label
 @export var geneSlots : Array[TextureRect]
 @export var geneSegment : Control
+@export var moneyLabel : Label
 
 func showRound(roundNum : int):
 	roundCount.text = "ROUND " + str(roundNum)
@@ -19,11 +20,18 @@ func showGenes(genes : Array[BaseGene]):
 	var I = 0
 	for g in geneSlots:
 		if I in range(genes.size()):
-			g.texture = load(genes[I].texture)
+			if genes[I].texture:
+				g.texture = load(genes[I].texture)
+			else:
+				g.texture = load("res://assets/sprites/genes/FloatyGene.png")
 			g._ready()
+			g.tooltip_text = str(genes[I])+"\n"+genes[I].desc
 		else:
 			g.texture = null
 		I += 1
+
+func showMoney(money ):
+	moneyLabel.text = "$" + str(money)
 
 var dt = 0.0
 func _process(delta):
