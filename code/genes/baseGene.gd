@@ -12,3 +12,6 @@ func onPaddleHit(_ball : Ball):
 
 func preCalc(_ball : Ball, delta : float):
 	pass
+
+func calculateDamage(_ball : Ball):
+	return

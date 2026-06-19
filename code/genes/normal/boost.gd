@@ -19,7 +19,6 @@ func preCalc(_ball : Ball, delta : float):
 		
 		if time >= 1:
 			boost = false
-			_ball.damage -= 3
 			print("dec damage")
 			time = 0
 			afterimage.set_meta("weight",afterimage.get_meta("weight",0) - 1)
@@ -29,7 +28,10 @@ func preCalc(_ball : Ball, delta : float):
 		if time >= 3:
 			time = 0
 			boost = true
-			_ball.damage += 3
 			print("inc damage")
 			afterimage.set_meta("weight",afterimage.get_meta("weight",0) + 1)
 			afterimage.emitting = true
+
+func calculateDamage(_ball : Ball):
+	if boost:
+		_ball.calculatingDamage += 3

@@ -4,24 +4,13 @@
 [ext_resource type="Script" uid="uid://dslre3i7haxjl" path="res://code/genes/baseGene.gd" id="2_fwo8l"]
 [ext_resource type="Texture2D" uid="uid://depg5tyw37wvi" path="res://assets/sprites/tinyBall.png" id="2_jj7gd"]
 [ext_resource type="Script" uid="uid://d3a3vvb6nr56e" path="res://code/roundedsprite.gd" id="3_fwo8l"]
-[ext_resource type="Script" uid="uid://s7ty60ufy1jb" path="res://code/genes/normal/homing.gd" id="3_v8l5b"]
-[ext_resource type="Script" uid="uid://cf80mxbx0u1u1" path="res://code/genes/normal/floaty.gd" id="4_iijjg"]
+[ext_resource type="Script" uid="uid://c2sk88qo4pc03" path="res://code/genes/unknown/misstep.gd" id="3_v8l5b"]
 [ext_resource type="Texture2D" uid="uid://c3wdnwh38uvur" path="res://assets/sprites/transparent_checkerboard.png" id="4_v8l5b"]
-[ext_resource type="Script" uid="uid://ciw0veqdetgss" path="res://code/genes/normal/boost.gd" id="5_f7kxq"]
 [ext_resource type="Texture2D" uid="uid://d2vrw54acvjak" path="res://assets/sprites/transparent_checkerboard_alt.png" id="5_iijjg"]
 
 [sub_resource type="Resource" id="Resource_iijjg"]
 script = ExtResource("3_v8l5b")
-metadata/_custom_type_script = "uid://s7ty60ufy1jb"
-
-[sub_resource type="Resource" id="Resource_f7kxq"]
-script = ExtResource("4_iijjg")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
-
-[sub_resource type="Resource" id="Resource_e8gir"]
-resource_local_to_scene = true
-script = ExtResource("5_f7kxq")
-metadata/_custom_type_script = "uid://ciw0veqdetgss"
+metadata/_custom_type_script = "uid://c2sk88qo4pc03"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85g3d"]
 radius = 29.068884
@@ -43,7 +32,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 [node name="Ball" type="CharacterBody2D" unique_id=1309816029]
 script = ExtResource("1_eew57")
 speed = 800.0
-genes = Array[ExtResource("2_fwo8l")]([SubResource("Resource_iijjg"), SubResource("Resource_f7kxq"), SubResource("Resource_e8gir")])
+genes = Array[ExtResource("2_fwo8l")]([SubResource("Resource_iijjg")])
 
 [node name="Icon3" type="Sprite2D" parent="." unique_id=1891162449]
 texture_filter = 1

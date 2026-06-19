@@ -1,7 +1,7 @@
 extends BaseGene
-class_name HomingGene
+class_name CowardlyGene
 
-var desc = "The ball will slightly move towards any nearby bricks. The power of the homing is dependent on the ball speed"
+var desc = "The ball will slightly move AWAY any nearby bricks. The power of the cowardice is dependent on the ball speed"
 
 func preCalc(_ball : Ball, _delta : float):
 	var bricks : Array[Brick] = _ball.get_tree().current_scene.bricks
@@ -18,4 +18,4 @@ func preCalc(_ball : Ball, _delta : float):
 		var dir = _ball.global_position.direction_to(lowestBrick.global_position)
 		print(lowestDist)
 		if lowestDist < 200:
-			_ball.calculatingVelocity += dir * _ball.speed *0.2
+			_ball.calculatingVelocity -= dir * _ball.speed *0.2

@@ -47,6 +47,7 @@ func _doRound():
 		$Camera2D.ball = newBall
 		dispManager.showShots(shotsRemaining)
 		balls.append(newBall)
+		newBall.isMain = true
 		await newBallRequest
 	
 	print("hoho")
@@ -54,7 +55,9 @@ func _doRound():
 	
 	await get_tree().create_timer(1).timeout
 	for I in balls:
-		I.queue_free()
+		if is_instance_valid(I):
+			I.queue_free()
+	balls.clear()
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_doRound()

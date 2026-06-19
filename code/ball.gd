@@ -11,6 +11,9 @@ signal ballDead
 @export var genes : Array[BaseGene]
 
 var calculatingVelocity
+var calculatingDamage
+
+var isMain = false
 
 func _ready():
 	velocity = Vector2.RIGHT.rotated(deg_to_rad(70)) * speed
@@ -51,6 +54,7 @@ func _physics_process(delta):
 	var col = move_and_collide(calculatingVelocity * delta)
 	
 	if col:
+		speed += 0.05
 		velocity = velocity.bounce(col.get_normal())
 		velocity = velocity.normalized() * speed
 		bounce.emit()
@@ -71,4 +75,10 @@ func _physics_process(delta):
 				I.onPaddleHit(self)
 
 func onBrickImpact(brick : Brick):
-	brick.hp -= damage
+	
+	calculatingDamage = damage
+	for I in genes:
+		I.calculateDamage(self)
+	
+	brick.hp -= round(calculatingDamage)
+	print(round(calculatingDamage))
