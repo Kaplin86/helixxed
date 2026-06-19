@@ -11,6 +11,7 @@ var bricks : Array[Brick]
 
 signal allBricksBroken
 var difficulty = 0.0
+var round = 0
 
 signal newBallRequest
 var win = false
@@ -83,6 +84,10 @@ func onBrickDie():
 
 func _ready():
 	dispManager.showGenes(equipedGenes)
+	money = 0
 	while true:
-		await _doShop()
+		round += 1
+		dispManager.showRound(round)
+		$Flavortext.flavortext(round)
 		await _doRound()
+		await _doShop()

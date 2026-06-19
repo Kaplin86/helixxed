@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://vsu2cs8v2qd" path="res://code/brickGenerator.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://cnrnpcvnl6ivu" path="res://code/roundManager.gd" id="1_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://ciajl7kdmek7t" path="res://icon.svg" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://efbf7akfxnv0" path="res://code/flavortext.gd" id="3_jbj1t"]
 [ext_resource type="Script" uid="uid://bgjrpoaypyffu" path="res://code/paddle.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://csffxwfdmak2k" path="res://scenes/ball.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://bwi1m1w21wm7y" path="res://code/camera.gd" id="6_tefeu"]
@@ -287,6 +288,7 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
 [node name="Gene Shop" type="Panel" parent="." unique_id=750539427 node_paths=PackedStringArray("shopArea")]
+visible = false
 offset_right = 763.0
 offset_bottom = 648.0
 script = ExtResource("18_dp3eg")
@@ -401,6 +403,15 @@ offset_top = 600.0
 offset_right = 520.0
 offset_bottom = 631.0
 text = "Continue"
+
+[node name="Flavortext" type="RichTextLabel" parent="." unique_id=463052941]
+offset_left = 64.0
+offset_top = 448.0
+offset_right = 704.0
+offset_bottom = 496.0
+bbcode_enabled = true
+horizontal_alignment = 1
+script = ExtResource("3_jbj1t")
 
 [connection signal="pressed" from="Gene Shop/HBoxContainer/VBoxContainer3/Panel2/Button2" to="Gene Shop" method="CharityPressed"]
 [connection signal="pressed" from="Gene Shop/Continue" to="Gene Shop" method="_on_continue_pressed"]
