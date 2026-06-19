@@ -2,6 +2,7 @@ extends RichTextLabel
 
 var textDef : Dictionary[int,Array] = {
 	1:["And so, The next ultimate organism experiment begins...","'Here is the new prototype! I hope it evolves into something... satisfactory, this time!'","The organism looks happy to be here.","You feel the urge to protect the organism."],
+	2:["'Great job.'"],
 	3:["The perfect minimum wage experience: Destroying bricks with ultimate prototypes","So far, so good.","'Thank you!!!'. You could not find where the voice came from."],
 	5:["You start to wonder if the prototype enjoys breaking bricks","The gene display shines quietly...","..."],
 	8:["Perhaps a promotion is due after getting this far, no?","Evolution. Extinction. Its all the same, isnt it?"],

@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://do2nphbc1yqp3" path="res://code/roundedspriteTextureRect.gd" id="13_trceg"]
 [ext_resource type="Texture2D" uid="uid://1xu3rh6dyn22" path="res://assets/sprites/genes/FloatyGene.png" id="14_a8y0u"]
 [ext_resource type="Script" uid="uid://dtffvnth0qvhc" path="res://code/gene_shop.gd" id="18_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://tixv6vc0bbaj" path="res://assets/audio/Robobozo.mp3" id="20_gqmmt"]
 
 [sub_resource type="Gradient" id="Gradient_dp3eg"]
 offsets = PackedFloat32Array(0, 0.44117647, 1)
@@ -141,12 +142,13 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
 shader = SubResource("Shader_choun")
 
-[node name="Node2D" type="Node2D" unique_id=1064481213 node_paths=PackedStringArray("brickGenerator", "paddle", "dispManager", "geneShop")]
+[node name="Node2D" type="Node2D" unique_id=1064481213 node_paths=PackedStringArray("brickGenerator", "paddle", "dispManager", "bgm", "geneShop")]
 script = ExtResource("1_ya4ey")
 brickGenerator = NodePath("Node")
 ballScene = ExtResource("4_tipki")
 paddle = NodePath("Paddle")
 dispManager = NodePath("ColorRect")
+bgm = NodePath("Robobozo")
 geneShop = NodePath("Gene Shop")
 
 [node name="ColorRect3" type="ColorRect" parent="." unique_id=885548887]
@@ -356,7 +358,6 @@ offset_left = 120.0
 offset_top = 14.0
 offset_right = 160.0
 offset_bottom = 54.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -367,7 +368,6 @@ offset_left = 218.0
 offset_top = 14.0
 offset_right = 258.0
 offset_bottom = 54.0
-texture = ExtResource("14_a8y0u")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -378,7 +378,6 @@ offset_left = 117.0
 offset_top = 103.0
 offset_right = 157.0
 offset_bottom = 143.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -389,7 +388,6 @@ offset_left = 218.0
 offset_top = 104.0
 offset_right = 258.0
 offset_bottom = 144.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -400,7 +398,6 @@ offset_left = 121.0
 offset_top = 213.0
 offset_right = 161.0
 offset_bottom = 253.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -411,7 +408,6 @@ offset_left = 215.0
 offset_top = 213.0
 offset_right = 255.0
 offset_bottom = 253.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -422,7 +418,6 @@ offset_left = 215.0
 offset_top = 333.0
 offset_right = 255.0
 offset_bottom = 373.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -433,7 +428,6 @@ offset_left = 122.0
 offset_top = 332.0
 offset_right = 162.0
 offset_bottom = 372.0
-texture = ExtResource("12_trceg")
 expand_mode = 2
 script = ExtResource("13_trceg")
 
@@ -636,6 +630,11 @@ theme_override_fonts/normal_font = ExtResource("10_0ld40")
 bbcode_enabled = true
 horizontal_alignment = 1
 script = ExtResource("3_jbj1t")
+
+[node name="Robobozo" type="AudioStreamPlayer" parent="." unique_id=1181129478]
+stream = ExtResource("20_gqmmt")
+volume_db = -9.018
+autoplay = true
 
 [connection signal="pressed" from="Gene Shop/HBoxContainer/VBoxContainer3/Panel2/Button2" to="Gene Shop" method="CharityPressed"]
 [connection signal="pressed" from="Gene Shop/Continue" to="Gene Shop" method="_on_continue_pressed"]

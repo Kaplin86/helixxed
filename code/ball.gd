@@ -104,7 +104,7 @@ func hitSound():
 	soundPitch += 0.1
 	var newSoundPlayer = AudioStreamPlayer.new()
 	add_child(newSoundPlayer)
-	newSoundPlayer.stream = load("res://assets/audio/button-24.mp3")
+	newSoundPlayer.stream = load("res://assets/audio/creatorshome-digital-click-357350.mp3")
 	newSoundPlayer.play()
 	newSoundPlayer.pitch_scale = soundPitch
 	await newSoundPlayer.finished

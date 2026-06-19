@@ -13,6 +13,8 @@ signal allBricksBroken
 var difficulty = 0.0
 var round = 0
 
+@export var bgm : AudioStreamPlayer
+
 signal newBallRequest
 var win = false
 
@@ -62,9 +64,10 @@ func _doRound():
 		newBall.genes = equipedGenes
 		await newBallRequest
 	
+	await get_tree().create_timer(0.3).timeout
 	process_mode = Node.PROCESS_MODE_DISABLED
 	
-	await get_tree().create_timer(0.3).timeout
+	
 	for I in balls:
 		if is_instance_valid(I):
 			I.queue_free()
@@ -93,12 +96,15 @@ func _ready():
 		round += 1
 		dispManager.showRound(round)
 		$Flavortext.flavortext(round)
+		bgm.bus = "master"
 		await _doRound()
 		if !win:
 			$Death.visible = true
 			await forever
+		bgm.bus = "shop"
+		money += randi_range(5,10)
 		await _doShop()
 
 
 func _on_retry_pressed():
-	get_tree().reload_current_scene()
+	Transition.toScene("res://scenes/main.tscn")

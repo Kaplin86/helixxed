@@ -192,4 +192,13 @@ position = Vector2(255, 115)
 scale = Vector2(0.44318223, 0.44318223)
 texture = ExtResource("5_8ln24")
 
+[node name="Label" type="Label" parent="." unique_id=1379296038]
+modulate = Color(1, 1, 1, 0.43529412)
+layout_mode = 0
+offset_left = 248.0
+offset_top = 13.0
+offset_right = 447.0
+offset_bottom = 36.0
+text = "(pronounced \"he licksed\")"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
