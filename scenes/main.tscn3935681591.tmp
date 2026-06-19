@@ -3,28 +3,15 @@
 [ext_resource type="Script" uid="uid://vsu2cs8v2qd" path="res://code/brickGenerator.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://cnrnpcvnl6ivu" path="res://code/roundManager.gd" id="1_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://ciajl7kdmek7t" path="res://icon.svg" id="2_sugp2"]
-[ext_resource type="Script" uid="uid://dslre3i7haxjl" path="res://code/genes/baseGene.gd" id="3_muem4"]
 [ext_resource type="Script" uid="uid://bgjrpoaypyffu" path="res://code/paddle.gd" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://cooisdbui2jlm" path="res://code/genes/normal/bouncy.gd" id="4_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://csffxwfdmak2k" path="res://scenes/ball.tscn" id="4_tipki"]
-[ext_resource type="Script" uid="uid://cf80mxbx0u1u1" path="res://code/genes/normal/floaty.gd" id="5_0ld40"]
 [ext_resource type="Script" uid="uid://bwi1m1w21wm7y" path="res://code/camera.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b6bj0jfohqwy4" path="res://scenes/brick.tscn" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://tc02t48nud0b" path="res://assets/sprites/helix.png" id="9_choun"]
 [ext_resource type="Shader" uid="uid://bbxvodj1i2dvr" path="res://assets/shaders/squiggle.gdshader" id="9_ya4ey"]
 [ext_resource type="Script" uid="uid://d3a3vvb6nr56e" path="res://code/roundedsprite.gd" id="10_choun"]
 [ext_resource type="Script" uid="uid://bqvfrtxt5qxh8" path="res://code/displayManager.gd" id="12_eb6dy"]
-[ext_resource type="Texture2D" uid="uid://mq3ug1ca0gau" path="res://assets/sprites/genes/BouncyGene.png" id="12_trceg"]
-[ext_resource type="Script" uid="uid://do2nphbc1yqp3" path="res://code/roundedspriteTextureRect.gd" id="13_trceg"]
-[ext_resource type="Texture2D" uid="uid://1xu3rh6dyn22" path="res://assets/sprites/genes/FloatyGene.png" id="14_a8y0u"]
-
-[sub_resource type="Resource" id="Resource_gqmmt"]
-script = ExtResource("4_dp3eg")
-metadata/_custom_type_script = "uid://cooisdbui2jlm"
-
-[sub_resource type="Resource" id="Resource_yc10j"]
-script = ExtResource("5_0ld40")
-metadata/_custom_type_script = "uid://cf80mxbx0u1u1"
+[ext_resource type="Texture2D" uid="uid://mq3ug1ca0gau" path="res://assets/sprites/genes/bouncy.png" id="12_trceg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
 size = Vector2(256, 20)
@@ -70,7 +57,6 @@ brickGenerator = NodePath("Node")
 ballScene = ExtResource("4_tipki")
 paddle = NodePath("Paddle")
 dispManager = NodePath("ColorRect")
-equipedGenes = Array[ExtResource("3_muem4")]([SubResource("Resource_gqmmt"), SubResource("Resource_yc10j")])
 
 [node name="Node" type="Node" parent="." unique_id=966838760 node_paths=PackedStringArray("brickStart", "brickEnd")]
 script = ExtResource("1_choun")
@@ -115,7 +101,7 @@ shape = SubResource("RectangleShape2D_sugp2")
 position = Vector2(576, 324)
 script = ExtResource("6_tefeu")
 
-[node name="ColorRect" type="Control" parent="." unique_id=460099268 node_paths=PackedStringArray("roundCount", "shotsRemaining", "geneSlots", "geneSegment")]
+[node name="ColorRect" type="Control" parent="." unique_id=460099268 node_paths=PackedStringArray("roundCount", "shotsRemaining")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 768.0
@@ -124,8 +110,6 @@ offset_bottom = 648.0
 script = ExtResource("12_eb6dy")
 roundCount = NodePath("ColorRect/VBoxContainer/Label")
 shotsRemaining = NodePath("ColorRect/VBoxContainer/Label2")
-geneSlots = [NodePath("ColorRect/VBoxContainer/Control/TextureRect"), NodePath("ColorRect/VBoxContainer/Control/TextureRect2"), NodePath("ColorRect/VBoxContainer/Control/TextureRect3"), NodePath("ColorRect/VBoxContainer/Control/TextureRect4"), NodePath("ColorRect/VBoxContainer/Control/TextureRect5"), NodePath("ColorRect/VBoxContainer/Control/TextureRect6"), NodePath("ColorRect/VBoxContainer/Control/TextureRect7"), NodePath("ColorRect/VBoxContainer/Control/TextureRect8")]
-geneSegment = NodePath("ColorRect/VBoxContainer/Control")
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=854310778]
 layout_mode = 1
@@ -184,9 +168,9 @@ offset_left = 120.0
 offset_top = 14.0
 offset_right = 160.0
 offset_bottom = 54.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect2" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=835703619]
 texture_filter = 1
@@ -195,9 +179,9 @@ offset_left = 218.0
 offset_top = 14.0
 offset_right = 258.0
 offset_bottom = 54.0
-texture = ExtResource("14_a8y0u")
-expand_mode = 2
-script = ExtResource("13_trceg")
+scale = Vector2(1.1888843, 1.1888843)
+texture = ExtResource("12_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect3" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=275696844]
 texture_filter = 1
@@ -206,9 +190,9 @@ offset_left = 117.0
 offset_top = 103.0
 offset_right = 157.0
 offset_bottom = 143.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect4" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=1583902500]
 texture_filter = 1
@@ -217,9 +201,9 @@ offset_left = 218.0
 offset_top = 104.0
 offset_right = 258.0
 offset_bottom = 144.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect5" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=544091386]
 texture_filter = 1
@@ -228,9 +212,9 @@ offset_left = 121.0
 offset_top = 213.0
 offset_right = 161.0
 offset_bottom = 253.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect6" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=284350887]
 texture_filter = 1
@@ -239,9 +223,9 @@ offset_left = 215.0
 offset_top = 213.0
 offset_right = 255.0
 offset_bottom = 253.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect7" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=168614854]
 texture_filter = 1
@@ -250,9 +234,9 @@ offset_left = 215.0
 offset_top = 333.0
 offset_right = 255.0
 offset_bottom = 373.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="TextureRect8" type="TextureRect" parent="ColorRect/ColorRect/VBoxContainer/Control" unique_id=1240380833]
 texture_filter = 1
@@ -261,9 +245,9 @@ offset_left = 122.0
 offset_top = 332.0
 offset_right = 162.0
 offset_bottom = 372.0
+scale = Vector2(1.1888843, 1.1888843)
 texture = ExtResource("12_trceg")
-expand_mode = 2
-script = ExtResource("13_trceg")
+script = ExtResource("10_choun")
 
 [node name="CenterContainer" type="CenterContainer" parent="ColorRect/ColorRect/VBoxContainer" unique_id=2131185306]
 layout_mode = 2

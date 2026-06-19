@@ -2,6 +2,7 @@ extends BaseGene
 class_name PanicGene
 
 var desc = "The ball suddenly gains velocity near bricks, but will change direction unpredictably"
+var texture = null
 
 func preCalc(_ball : Ball, _delta : float):
 	var bricks : Array[Brick] = _ball.get_tree().current_scene.bricks

@@ -14,6 +14,9 @@ var difficulty = 0.0
 
 signal newBallRequest
 var win = false
+
+@export var equipedGenes : Array[BaseGene]
+
 func _doRound():
 	win = false
 	difficulty += 0.5
@@ -48,6 +51,7 @@ func _doRound():
 		dispManager.showShots(shotsRemaining)
 		balls.append(newBall)
 		newBall.isMain = true
+		newBall.genes = equipedGenes
 		await newBallRequest
 	
 	print("hoho")
@@ -60,7 +64,7 @@ func _doRound():
 	balls.clear()
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	_doRound()
+	
 
 func onBrickDie():
 	await get_tree().process_frame
@@ -69,4 +73,6 @@ func onBrickDie():
 		allBricksBroken.emit()
 
 func _ready():
-	_doRound()
+	dispManager.showGenes(equipedGenes)
+	while true:
+		await _doRound()

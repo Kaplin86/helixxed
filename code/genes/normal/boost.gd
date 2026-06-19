@@ -5,6 +5,8 @@ var desc = "Every 3 seconds, the ball will gain extra speed for 1 second. It wil
 var time = 0.0
 var boost = false
 
+var texture = null
+
 func preCalc(_ball : Ball, delta : float):
 	
 	if !_ball.has_meta("afterimage"):
