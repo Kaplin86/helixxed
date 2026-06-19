@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://63jgvlx46ram"]
+
+[ext_resource type="Script" uid="uid://dmwagati1tup8" path="res://code/transition.gd" id="1_rerct"]
+
+[sub_resource type="Gradient" id="Gradient_kg4ax"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rerct"]
+gradient = SubResource("Gradient_kg4ax")
+
+[node name="Node2D" type="Node2D" unique_id=4990064]
+script = ExtResource("1_rerct")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1547247793]
+modulate = Color(1, 1, 1, 0)
+z_index = 5
+position = Vector2(536.5, 354.75)
+scale = Vector2(5.1914063, 710.5)
+texture = SubResource("GradientTexture1D_rerct")

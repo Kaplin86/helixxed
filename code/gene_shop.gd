@@ -38,6 +38,7 @@ func doShop():
 			newButton.icon = load(gene.texture)
 		newButton.expand_icon = true
 		newButton.text = gene.get_script().get_global_name() + "\n ($" + str(price) + ")"
+		newButton.tooltip_text = str(gene)+"\n"+gene.desc
 		shopArea.add_child(newButton)
 		newButton.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		newButton.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST

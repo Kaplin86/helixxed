@@ -1,6 +1,42 @@
 [gd_scene format=3 uid="uid://byqeu6le02s7i"]
 
 [ext_resource type="Script" uid="uid://c0sjapu47mq6b" path="res://code/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Shader" uid="uid://bkecm8lrxgbcp" path="res://assets/shaders/overlaptextures.gdshader" id="2_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://d1a5fdk2wdctr" path="res://assets/sprites/Helixxed (1).svg" id="3_wu84c"]
+
+[sub_resource type="Gradient" id="Gradient_dp3eg"]
+offsets = PackedFloat32Array(0, 0.44117647, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.44705883, 0.44705883, 0.44705883, 0.29803923, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ld40"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqmmt"]
+noise = SubResource("FastNoiseLite_0ld40")
+color_ramp = SubResource("Gradient_dp3eg")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_gqmmt"]
+offsets = PackedFloat32Array(0, 0.44117647, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.44705883, 0.44705883, 0.44705883, 0.29803923, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yc10j"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jscy8"]
+noise = SubResource("FastNoiseLite_yc10j")
+color_ramp = SubResource("Gradient_gqmmt")
+seamless = true
+invert = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ln24"]
+shader = ExtResource("2_bqqt6")
+shader_parameter/time_scale = 0.10000000149012
+shader_parameter/velocity_scale = 0.10000000149012
+shader_parameter/amount = 5
+shader_parameter/patterns = Array[Texture2D]([SubResource("NoiseTexture2D_gqmmt"), SubResource("NoiseTexture2D_gqmmt"), SubResource("NoiseTexture2D_jscy8")])
+shader_parameter/directions = PackedVector2Array(0, 0, 1, 1, -1, -1, 4, 4, 2, 2)
+shader_parameter/velocities = PackedFloat32Array(0, 2, 3, 2, 2)
+shader_parameter/visible_duration = 15.0
+shader_parameter/transition_duration = 2.0
 
 [node name="Main Menu" type="Control" unique_id=1434203507]
 layout_mode = 3
@@ -11,10 +47,54 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1892024417]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -11.0
+offset_right = 786.00006
+offset_bottom = 661.0
+scale = Vector2(1.551282, 1.0220995)
+color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1949251760]
+material = SubResource("ShaderMaterial_8ln24")
+layout_mode = 0
+offset_left = -22.0
+offset_top = -11.0
+offset_right = 786.00006
+offset_bottom = 661.0
+scale = Vector2(1.551282, 1.0220995)
+color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+
 [node name="Button" type="Button" parent="." unique_id=1359191313]
 layout_mode = 0
-offset_left = 553.0
-offset_top = 314.0
-offset_right = 594.0
-offset_bottom = 345.0
+offset_left = 940.0
+offset_top = 530.0
+offset_right = 1073.0
+offset_bottom = 589.0
 text = "Play"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1459976879]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 210.0
+offset_right = 443.0
+offset_bottom = 621.0
+bbcode_enabled = true
+text = "Guide for new scientists:
+1. You are to mutate and experiment to help aid the project of creating an [shake rate=20.0 level=5 connected=1] ULTIMATE BEING [/shake]
+
+2. You will run through the simple yet monotonous task of [b]Brick Breaking [/b] in order to validate if the prototype is a valid candidate.
+
+3. After proving your prototype, we will supply you the budget to gain more genes.
+
+4. With these genes, You can mutate your prototype to greater forms.
+
+5. If your prototype fails even ONE test, it will be [b] discarded [/b]"
+
+[node name="Helixxed(1)" type="Sprite2D" parent="." unique_id=1786749442]
+position = Vector2(243.87561, 117.46066)
+scale = Vector2(0.43413407, 0.43413407)
+texture = ExtResource("3_wu84c")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

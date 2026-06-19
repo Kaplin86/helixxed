@@ -64,11 +64,14 @@ func _doRound():
 	
 	process_mode = Node.PROCESS_MODE_DISABLED
 	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.3).timeout
 	for I in balls:
 		if is_instance_valid(I):
 			I.queue_free()
 	balls.clear()
+	
+	for I in bricks:
+		if is_instance_valid(I): I.queue_free()
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
@@ -81,6 +84,7 @@ func onBrickDie():
 	bricks = bricks.filter(func(obj): return is_instance_valid(obj))
 	if bricks.size() == 0:
 		allBricksBroken.emit()
+signal forever
 
 func _ready():
 	dispManager.showGenes(equipedGenes)
@@ -90,4 +94,11 @@ func _ready():
 		dispManager.showRound(round)
 		$Flavortext.flavortext(round)
 		await _doRound()
+		if !win:
+			$Death.visible = true
+			await forever
 		await _doShop()
+
+
+func _on_retry_pressed():
+	get_tree().reload_current_scene()

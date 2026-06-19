@@ -1,6 +1,8 @@
 shader_type canvas_item;
 render_mode world_vertex_coords;
 
+/**https://godotshaders.com/shader/squigglevision/*/
+
 group_uniforms Squiggle;
 /**
  * Noise texture scale

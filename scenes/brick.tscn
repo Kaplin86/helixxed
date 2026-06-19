@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnwvxf3c3w5b3" path="res://code/brick.gd" id="1_0w5h4"]
 [ext_resource type="Texture2D" uid="uid://ciajl7kdmek7t" path="res://icon.svg" id="1_5l4w1"]
+[ext_resource type="FontFile" uid="uid://4ux6581iolwn" path="res://assets/fonts/old-english-gothic-pixel-font/OldEnglishGothicPixelRegular-gx1jp.otf" id="3_7mekc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0w5h4"]
 size = Vector2(46, 16)
@@ -19,9 +20,10 @@ shape = SubResource("RectangleShape2D_0w5h4")
 
 [node name="hp" type="Label" parent="." unique_id=164199918]
 offset_left = -23.0
-offset_top = -12.0
+offset_top = -10.0
 offset_right = 23.0
-offset_bottom = 11.0
+offset_bottom = 13.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "1"
+theme_override_fonts/font = ExtResource("3_7mekc")
+text = "2"
 horizontal_alignment = 1
