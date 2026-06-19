@@ -2,7 +2,7 @@ extends BaseGene
 class_name HomingGene
 
 var desc = "The ball will slightly move towards any nearby bricks. The power of the homing is dependent on the ball speed"
-var texture = null
+var texture = "res://assets/sprites/genes/HomingGene.png"
 
 func preCalc(_ball : Ball, _delta : float):
 	var bricks : Array[Brick] = _ball.get_tree().current_scene.bricks
