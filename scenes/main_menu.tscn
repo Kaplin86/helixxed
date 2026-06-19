@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://byqeu6le02s7i"]
 
 [ext_resource type="Script" uid="uid://c0sjapu47mq6b" path="res://code/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Shader" uid="uid://bkecm8lrxgbcp" path="res://assets/shaders/overlaptextures.gdshader" id="2_bqqt6"]
 [ext_resource type="Shader" uid="uid://bbxvodj1i2dvr" path="res://assets/shaders/squiggle.gdshader" id="3_oa1go"]
 [ext_resource type="Texture2D" uid="uid://cw8nqb0hud7j7" path="res://assets/sprites/helix_guy.png" id="4_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://dhq0hiu02vaco" path="res://assets/sprites/Helixxed (2).svg" id="5_8ln24"]
@@ -14,33 +13,10 @@ colors = PackedColorArray(0, 0, 0, 0, 0.44705883, 0.44705883, 0.44705883, 0.2980
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0ld40"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqmmt"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rtw2f"]
 noise = SubResource("FastNoiseLite_0ld40")
 color_ramp = SubResource("Gradient_dp3eg")
 seamless = true
-
-[sub_resource type="Gradient" id="Gradient_gqmmt"]
-offsets = PackedFloat32Array(0, 0.44117647, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.44705883, 0.44705883, 0.44705883, 0.29803923, 1, 1, 1, 0)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_yc10j"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jscy8"]
-noise = SubResource("FastNoiseLite_yc10j")
-color_ramp = SubResource("Gradient_gqmmt")
-seamless = true
-invert = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ln24"]
-shader = ExtResource("2_bqqt6")
-shader_parameter/time_scale = 0.10000000149012
-shader_parameter/velocity_scale = 0.10000000149012
-shader_parameter/amount = 5
-shader_parameter/patterns = Array[Texture2D]([SubResource("NoiseTexture2D_gqmmt"), SubResource("NoiseTexture2D_gqmmt"), SubResource("NoiseTexture2D_jscy8")])
-shader_parameter/directions = PackedVector2Array(0, 0, 1, 1, -1, -1, 4, 4, 2, 2)
-shader_parameter/velocities = PackedFloat32Array(0, 2, 3, 2, 2)
-shader_parameter/visible_duration = 15.0
-shader_parameter/transition_duration = 2.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ya4ey"]
 
@@ -123,23 +99,30 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="ColorRect3" type="ColorRect" parent="." unique_id=1892024417]
+clip_children = 2
 layout_mode = 0
 offset_left = -22.0
-offset_top = -11.0
+offset_top = -11.000001
 offset_right = 786.00006
 offset_bottom = 661.0
 scale = Vector2(1.551282, 1.0220995)
 color = Color(0.4045111, 0.40451115, 0.4045111, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=1949251760]
-material = SubResource("ShaderMaterial_8ln24")
-layout_mode = 0
-offset_left = -22.0
-offset_top = -11.0
-offset_right = 786.00006
-offset_bottom = 661.0
-scale = Vector2(1.551282, 1.0220995)
-color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+[node name="Parallax2D" type="Parallax2D" parent="ColorRect3" unique_id=1211543311]
+repeat_size = Vector2(512, 512)
+autoscroll = Vector2(30, 30)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect3/Parallax2D" unique_id=1012919542]
+texture = SubResource("NoiseTexture2D_rtw2f")
+
+[node name="Parallax2D2" type="Parallax2D" parent="ColorRect3" unique_id=1523372409]
+repeat_size = Vector2(512, 512)
+autoscroll = Vector2(90, 30)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect3/Parallax2D2" unique_id=1867468413]
+texture = SubResource("NoiseTexture2D_rtw2f")
 
 [node name="Button" type="Button" parent="." unique_id=1359191313]
 layout_mode = 0

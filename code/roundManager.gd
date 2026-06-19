@@ -96,7 +96,8 @@ func _ready():
 		round += 1
 		dispManager.showRound(round)
 		$Flavortext.flavortext(round)
-		bgm.bus = "master"
+		bgm.bus = "Master"
+		
 		await _doRound()
 		if !win:
 			$Death.visible = true
