@@ -2,7 +2,7 @@ extends BaseGene
 class_name CowardlyGene
 
 var desc = "The ball will slightly move AWAY any nearby bricks. The power of the cowardice is dependent on the ball speed"
-var texture = null
+var texture = "res://assets/sprites/genes/CowardlyGene.png"
 
 func preCalc(_ball : Ball, _delta : float):
 	var bricks : Array[Brick] = _ball.get_tree().current_scene.bricks

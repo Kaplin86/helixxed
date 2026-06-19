@@ -2,7 +2,7 @@ extends BaseGene
 class_name MisstepGene
 
 var desc = "The Ball will bounce in random directions, but damage is increased by 3"
-var texture = null
+var texture = "res://assets/sprites/genes/MisstepGene.png"
 
 func onGeneralBounce(_ball : Ball):
 	var angle = randf_range(-90,90)
