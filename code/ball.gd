@@ -85,6 +85,10 @@ func _physics_process(delta):
 			# genes part 3
 			for I in genes:
 				I.onPaddleHit(self)
+			
+			velocity = Vector2.from_angle(deg_to_rad(180) + get_angle_to(col.get_collider().global_position))
+			velocity = velocity.normalized() * speed
+			
 		print(bouncesSinceLastHit)
 		if bouncesSinceLastHit > 8:
 			velocity = velocity.rotated(deg_to_rad(30))

@@ -7,7 +7,7 @@ var basicGenes : Array[BaseGene] = [
 	BoostGene.new(),
 	BouncyGene.new(),
 	FloatyGene.new(),
-	PaddleFreezeGene.new(),
+	#PaddleFreezeGene.new(),
 	HomingGene.new(),
 	MomentumGene.new()
 ]

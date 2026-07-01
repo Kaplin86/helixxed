@@ -13,13 +13,11 @@ config_version=5
 config/name="Helixxed"
 run/main_scene="uid://byqeu6le02s7i"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
 
 [audio]
 
-general/default_playback_type.web=0
-
 buses/default_bus_layout="uid://dhypu5chmfyff"
+general/default_playback_type.web=0
 
 [autoload]
 
